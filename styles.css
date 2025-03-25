@@ -1,0 +1,12 @@
+/* TITTLE PAGE */
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 20px;
+}
+/* PAGE 1 (INITAL INTERACTION) */
+table {
+  width: 60%;
+  margin: 0 auto;
+  border-collapse: collapse;
+}
