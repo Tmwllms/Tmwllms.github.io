@@ -1,12 +1,101 @@
-/* TITTLE PAGE */
+/* General Styling */
 body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  margin: 20px;
+  font-family: "Arial", sans-serif;
+  background-color: #000000;
+  margin: 0;
+  padding: 0;
+  color: #bc21bf;
 }
-/* PAGE 1 (INITAL INTERACTION) */
+
+/* Centered TITTLE PAGE styling */
+.center {
+  font-family: "Fira Code", monospace;
+  font-optical-sizing: auto;
+  font-style: normal; /* Adjust space for centered content */
+}
+
+h1 {
+  font-size: 48px;
+  color: #ffffff;
+}
+
+/* Page Layouts */
+
+/* PAGE 1 (Centered Tittle Page) */
+.center h1 {
+  font-size: 48px;
+  color: #ffffff;
+}
+
+/* Page 2 (Table Page) */
 table {
-  width: 60%;
-  margin: 0 auto;
+  width: 90%;
+  max-width: 800px;
+  margin: 20px auto;
   border-collapse: collapse;
+  background-color: #bd21bf;
+  font-family: "Fira Code";
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+  padding: 12px 15px;
+  text-align: center;
+  border-bottom: 1px solid #000000;
+}
+
+th {
+  background-color: #d0ff01;
+  color: #bd21bf;
+}
+
+td {
+  background-color: #ffffff;
+}
+
+tr:nth-child(even) {
+  background-color: #000000;
+}
+
+/* Page 3, 4, 5 (Text-based Pages with Paragraphs) */
+h2 {
+  text-align: center;
+  color: #333;
+  font-size: 32px;
+  margin-top: 50px;
+}
+
+p {
+  width: 90%;
+  max-width: 900px;
+  margin: 20px auto;
+  line-height: 1.6;
+  font-size: 18px;
+  color: #444;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer (for all pages) */
+footer {
+  background-color: #222;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+footer a:hover {
+  color: #0078d4;
 }
