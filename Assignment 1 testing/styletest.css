@@ -1,0 +1,111 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: white;
+}
+
+/* Section Colors */
+.one {
+  background-color: #b3001b;
+}
+.two {
+  background-color: blue;
+}
+.three {
+  background-color: aquamarine;
+}
+.four {
+  background-color: cadetblue;
+}
+.five {
+  background-color: blueviolet;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  min-height: 200px;
+}
+
+/* Heading Styles */
+.main-heading {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.sub-heading {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.question-heading {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* Table */
+.table-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  color: red;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+td {
+  padding: 20px;
+  border: 1px solid red;
+}
+
+/* Content Layout */
+.content1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  align-items: left;
+  gap: 20px;
+  max-width: 800px;
+  text-align: left;
+}
+
+.content2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: right;
+  align-items: right;
+  gap: 20px;
+  max-width: 800px;
+  text-align: right;
+}
+
+/* Image Box */
+.image-box {
+  background-color: white;
+  color: red;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+  border: 2px solid red;
+}
+
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+    text-align: center;
+  }
+}
