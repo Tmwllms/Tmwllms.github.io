@@ -27,9 +27,55 @@ h1 {
 
 /* Page Layouts */
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+}
+
+.one {
+  background-color: #ff5733;
+}
+.two {
+  background-color: #33ff57;
+}
+.three {
+  background-color: #3357ff;
+}
+.four {
+  background-color: #ff33a8;
+}
+.five {
+  background-color: #f4a261;
+}
+
 /* PAGE 1 (Centered Tittle Page) */
 
 /* Page 2 (Table Page) */
+section {
+  width: 400px;
+  border: 3px dashed black;
+  margin: 0 auto;
+  min-height: 200px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: beige;
+}
 table {
   width: 90%;
   max-width: 800px;
