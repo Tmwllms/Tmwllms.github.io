@@ -1,29 +1,35 @@
-/* General Styles */
+/* GENERAL STYLES */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   text-align: center;
   color: white;
 }
+.p-one {
+  margin: 0 auto;
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+}
 
-/* Section Colors */
+/* SECTION COLOURS & STYLING */
 .one {
-  background-color: #b3001b;
+  background-color: #b5179f;
 }
 .two {
-  background-color: blue;
+  background-color: #d0ff01;
 }
 .three {
-  background-color: aquamarine;
+  background-color: #fe006e;
 }
 .four {
-  background-color: cadetblue;
+  background-color: #69faff;
 }
 .five {
-  background-color: blueviolet;
+  background-color: #8338ec;
 }
 
 .section {
+  /* General settings for each section */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,7 +38,17 @@ body {
   min-height: 200px;
 }
 
-/* Heading Styles */
+.section-one {
+  /* Specific section settings for ensuring full screen height for the tittle page */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #b5179f;
+  padding: 50px;
+}
+
+/* HEADING STYLES */
 .main-heading {
   font-size: 2.5rem;
   font-weight: bold;
@@ -48,7 +64,7 @@ body {
   font-weight: bold;
 }
 
-/* Table */
+/* TABLE STYLING */
 .table-container {
   background-color: white;
   padding: 20px;
@@ -68,7 +84,7 @@ td {
   border: 1px solid red;
 }
 
-/* Content Layout */
+/* CONTENT LAYOUT */
 .content1 {
   display: flex;
   flex-wrap: wrap;
@@ -89,7 +105,7 @@ td {
   text-align: right;
 }
 
-/* Image Box */
+/* IMAGE BOX STYLING */
 .image-box {
   background-color: white;
   color: red;
