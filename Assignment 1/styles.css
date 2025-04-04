@@ -1,18 +1,28 @@
 /* GENERAL STYLES */
 body {
   margin: 0;
+  padding: 0;
   font-family: "Karla", sans-serif;
   font-size: 1.1rem;
   text-align: center;
   color: white;
+  line-height: 1.6;
+  overflow-x: hidden; /* Used to prevent horizontal scrolling *fix for section 1 formatting* */
 }
 
-/* SECTION COLOURS & STYLING */
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+/* SECTION COLOURS & STYLING - using the colour scheme from my reasearch website as inspiration, I divided each section accordingly by colour*/
 .one {
   background-color: #b5179f;
 }
 .two {
   background-color: #d0ff01;
+  /* specific text colouring used to fix its contast against the background */
   color: black;
 }
 .three {
@@ -20,6 +30,7 @@ body {
 }
 .four {
   background-color: #69faff;
+  /* specific text colouring used to fix its contast against the background */
   color: black;
 }
 .five {
@@ -27,31 +38,65 @@ body {
 }
 
 .section {
-  /* General settings for each section */
+  /* general section formatting and styling */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 40px 20px;
   min-height: 200px;
+  width: 100%;
+  box-sizing: border-box;
+  /* overflow-x used to fix content formatting while ensuring its mobile compatable */
+  overflow-x: hidden;
 }
 
 .section-one {
-  /* Specific section settings for ensuring full screen height for the tittle page */
+  /* specific styling controls for the tittle page */
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   height: 100vh;
   background-color: #b5179f;
   padding: 50px;
+  box-sizing: border-box;
+  width: 100%;
+  overflow-x: hidden;
 }
 
-/* HEADING STYLES */
+.section-one .main-heading {
+  font-family: "Rubik Microbe", system-ui;
+  font-size: 5rem;
+  margin: 0;
+  font-weight: bold;
+  text-align: center;
+}
+/* specific formatting for the heading text and it's subtittle to ensure that they are stacked propperly */
+.section-one .sub-title {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin-top: 10px;
+  display: block;
+  width: 100%;
+}
+
+/* HEADING STYLES - classes allowing for specific styling control on each heading type*/
 .main-heading {
   font-family: "Rubik Microbe", system-ui;
   font-size: 5rem;
   margin: 0 auto;
+  margin-bottom: 10px;
   font-weight: bold;
+}
+
+.sub-title {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin-top: 10px;
+  display: block;
 }
 
 .sub-heading {
@@ -67,27 +112,33 @@ body {
   font-weight: bold;
 }
 
-/* TABLE STYLING */
+/* TABLE STYLING - pretty simple table styling with a white container for more clarity/contrast */
 .table-container {
   background-color: white;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 50px;
 }
 
 table {
   border-collapse: collapse;
   width: 100%;
-  color: red;
+  color: rgb(0, 0, 0);
   font-size: 1rem;
   font-weight: bold;
 }
 
-td {
+td,
+th {
   padding: 20px;
-  border: 1px solid red;
+  border: 1px solid rgb(0, 0, 0);
 }
 
-/* CONTENT LAYOUT */
+th {
+  background-color: black;
+  color: white;
+}
+
+/* CONTENT LAYOUT - specifiaclly for formatting the text and images in section 3,4,5 */
 .content1 {
   display: flex;
   justify-content: space-between;
@@ -117,7 +168,7 @@ td {
   background-color: rgba(255, 255, 255, 0);
 }
 
-/* IMAGE BOX STYLING */
+/* IMAGE BOX STYLING - initially a placeholder for where the images would go but also used to add a dashed border for the images*/
 .image-box {
   background-color: white;
   color: rgb(0, 0, 0);
@@ -132,16 +183,56 @@ td {
 }
 
 @media (max-width: 768px) {
-  .content {
+  /* MOBILE STYLES - with some help from ChatGPT to ensure my code is all compatable for web and mobile I added some additional mobile paramteres*/
+
+  body {
+    font-size: 1rem;
+  }
+
+  .section {
+    padding: 20px;
+  }
+
+  .main-heading {
+    font-size: 3rem;
+  }
+
+  .sub-title {
+    font-size: 1rem;
+  }
+
+  /* Adjusting content layout on smaller screens */
+  .content1 {
     flex-direction: column;
     text-align: center;
   }
+
   .text-side,
   .image-side {
     flex: 1 1 100%;
+    text-align: center;
   }
 
-  .text-side {
-    text-align: center;
+  .image-side img {
+    width: 80%;
+  }
+
+  /* Adjusting the table layout for small screens */
+  .table-container {
+    padding: 10px;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+
+  th,
+  td {
+    padding: 10px;
+  }
+
+  .image-box {
+    width: 120px;
+    height: 120px;
   }
 }
