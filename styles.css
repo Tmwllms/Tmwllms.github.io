@@ -182,7 +182,7 @@ th {
   border: 2px dashed rgb(0, 0, 0);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 668px) {
   /* MOBILE STYLES - with some help from ChatGPT to ensure my code is all compatable for web and mobile I added some additional mobile paramteres*/
 
   body {
@@ -194,7 +194,7 @@ th {
   }
 
   .main-heading {
-    font-size: 1rem;
+    font-size: 1.5rem;
   }
 
   .sub-title {
