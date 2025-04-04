@@ -1,14 +1,10 @@
 /* GENERAL STYLES */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: "Karla", sans-serif;
+  font-size: 1.1rem;
   text-align: center;
   color: white;
-}
-.p-one {
-  margin: 0 auto;
-  font-family: Arial, Helvetica, sans-serif;
-  color: black;
 }
 
 /* SECTION COLOURS & STYLING */
@@ -17,12 +13,14 @@ body {
 }
 .two {
   background-color: #d0ff01;
+  color: black;
 }
 .three {
   background-color: #fe006e;
 }
 .four {
   background-color: #69faff;
+  color: black;
 }
 .five {
   background-color: #8338ec;
@@ -50,17 +48,22 @@ body {
 
 /* HEADING STYLES */
 .main-heading {
-  font-size: 2.5rem;
+  font-family: "Rubik Microbe", system-ui;
+  font-size: 5rem;
+  margin: 0 auto;
   font-weight: bold;
 }
 
 .sub-heading {
-  font-size: 1.8rem;
+  font-family: "Rubik Mono One", monospace;
+  font-size: 2rem;
   font-weight: bold;
+  text-decoration: underline;
 }
 
 .question-heading {
-  font-size: 1rem;
+  font-family: "Space Mono", monospace;
+  font-size: 1.1rem;
   font-weight: bold;
 }
 
@@ -90,8 +93,8 @@ td {
   flex-wrap: wrap;
   justify-content: left;
   align-items: left;
-  gap: 20px;
-  max-width: 800px;
+  gap: 0px;
+  max-width: 1000px;
   text-align: left;
 }
 
@@ -100,8 +103,8 @@ td {
   flex-wrap: wrap;
   justify-content: right;
   align-items: right;
-  gap: 20px;
-  max-width: 800px;
+  gap: 0px;
+  max-width: 1000px;
   text-align: right;
 }
 

@@ -1,136 +1,130 @@
-/* General Styling */
+/* GENERAL STYLES */
 body {
-  font-family: "times-new-roman";
-  background-color: #000000;
-  margin: 0 auto;
-  padding: 0 auto;
-  color: #bc21bf;
-}
-h4 {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/* Centered TITTLE PAGE styling  - used ChatGPT to help with installing google fonts*/
-.center {
-  font-family: "Fira Code", monospace;
-  font-optical-sizing: auto;
-  font-style: normal;
-}
-
-h1 {
-  text-align: center;
-  font-size: 48px;
-  margin-top: 300px;
-  margin-bottom: 300px;
-  color: #ffffff;
-}
-
-/* Page Layouts */
-
-* {
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  font-family: "Karla", sans-serif;
+  font-size: 1.1rem;
+  text-align: center;
+  color: white;
 }
 
-body {
-  font-family: Arial, sans-serif;
+/* SECTION COLOURS & STYLING */
+.one {
+  background-color: #b5179f;
+}
+.two {
+  background-color: #d0ff01;
+  color: black;
+}
+.three {
+  background-color: #fe006e;
+}
+.four {
+  background-color: #69faff;
+  color: black;
+}
+.five {
+  background-color: #8338ec;
 }
 
-.page {
-  width: 100vw;
+.section {
+  /* General settings for each section */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  min-height: 200px;
+}
+
+.section-one {
+  /* Specific section settings for ensuring full screen height for the tittle page */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 100vh;
+  background-color: #b5179f;
+  padding: 50px;
+}
+
+/* HEADING STYLES */
+.main-heading {
+  font-family: "Rubik Microbe", system-ui;
+  font-size: 5rem;
+  margin: 0 auto;
+  font-weight: bold;
+}
+
+.sub-heading {
+  font-family: "Rubik Mono One", monospace;
+  font-size: 2rem;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.question-heading {
+  font-family: "Space Mono", monospace;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+/* TABLE STYLING */
+.table-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  color: red;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+td {
+  padding: 20px;
+  border: 1px solid red;
+}
+
+/* CONTENT LAYOUT */
+.content1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  align-items: left;
+  gap: 0px;
+  max-width: 1000px;
+  text-align: left;
+}
+
+.content2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: right;
+  align-items: right;
+  gap: 0px;
+  max-width: 1000px;
+  text-align: right;
+}
+
+/* IMAGE BOX STYLING */
+.image-box {
+  background-color: white;
+  color: red;
+  font-size: 1.2rem;
+  font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
-  font-weight: bold;
-  color: white;
+  width: 150px;
+  height: 150px;
+  border: 2px solid red;
 }
 
-.one {
-  background-color: #ff5733;
-}
-.two {
-  background-color: #33ff57;
-}
-.three {
-  background-color: #3357ff;
-}
-.four {
-  background-color: #ff33a8;
-}
-.five {
-  background-color: #f4a261;
-}
-
-/* PAGE 1 (Centered Tittle Page) */
-
-/* Page 2 (Table Page) */
-section {
-  width: 400px;
-  border: 3px dashed black;
-  margin: 0 auto;
-  min-height: 200px;
-  padding: 20px;
-  margin-bottom: 20px;
-  background-color: beige;
-}
-table {
-  width: 90%;
-  max-width: 800px;
-  margin: 20px auto;
-  border-collapse: collapse;
-  background-color: #ffffff;
-  font-family: "times-new-roman";
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-th,
-td {
-  padding: 12px 15px;
-  text-align: center;
-  border-bottom: 1px solid #000000;
-}
-
-th {
-  background-color: #d0ff01;
-  color: #bd21bf;
-}
-
-td {
-  background-color: #ffffff;
-}
-
-tr:nth-child(even) {
-  background-color: #000000;
-}
-
-/* Page 3, 4, 5 (Text-based Pages with Paragraphs) */
-h2 {
-  text-align: left;
-  color: #ffffff;
-  font-size: 32px;
-  margin-top: 50px;
-}
-
-/* Footer (for all pages) */
-footer {
-  background-color: #222;
-  color: white;
-  text-align: center;
-  padding: 20px;
-  position: relative;
-  bottom: 0;
-  width: 100%;
-}
-
-footer a {
-  color: white;
-  text-decoration: none;
-  margin: 0 10px;
-}
-
-footer a:hover {
-  color: #0078d4;
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+    text-align: center;
+  }
 }
