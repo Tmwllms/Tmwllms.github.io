@@ -29,14 +29,14 @@ body {
 /* Add additional styles as needed */
 /* Fullscreen header for Home */
 .fullpage-header {
-  height: 50vh;
+  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 3em;
   background-color: var(--main-bg-color);
   color: var(--main-text-color);
-  transition: all 0.5s;
+  transition: all 1s;
 }
 
 #main-header {
@@ -46,7 +46,7 @@ body {
 .container {
   max-width: 1000px;
   width: 100%;
-  padding: 10px;
+  padding: 1px;
 }
 
 /* Header styling */
@@ -73,7 +73,7 @@ nav ul {
 
 nav ul li {
   display: inline-block;
-  margin: 0 10px;
+  margin: 0 50px;
 }
 
 nav a {

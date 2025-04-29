@@ -36,8 +36,8 @@ function showHome() {
   header.classList.add("fullpage-header");
   pageContent.innerHTML = `
     <section>
-      <h2>Welcome</h2>
-      <p>Click "Music" to enjoy calming sounds, or "Timer" to focus your session!</p>
+      <h2>Welcome!</h2>
+      <p>Click "Music" to enjoy calming sounds, or "Timer" to focus your study or meditation session!</p>
     </section>
   `;
 }
