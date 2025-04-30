@@ -26,7 +26,6 @@ body {
   justify-content: space-between;
 }
 
-/* Add additional styles as needed */
 /* Fullscreen header for Home */
 .fullpage-header {
   height: 80vh;
@@ -42,6 +41,20 @@ body {
 #main-header {
   transition: all 0.5s; /* Smooth shrinking */
 }
+
+nav {
+  margin-top: 10px;
+  transition: margin 0.3s ease;
+}
+
+header.fullpage-header + nav {
+  margin-top: 0px; /* Pulls nav closer when header is tall */
+}
+
+header:not(.fullpage-header) + nav {
+  margin-top: 5px;
+}
+
 /* Create a container for the main content */
 .container {
   max-width: 1000px;
@@ -60,8 +73,12 @@ header {
 
 /* Navigation styling */
 nav {
-  margin-top: 20px;
+  margin-top: 0;
   text-align: center;
+}
+
+header.fullpage-header + nav {
+  margin-top: 20px;
 }
 
 nav ul {
@@ -73,7 +90,7 @@ nav ul {
 
 nav ul li {
   display: inline-block;
-  margin: 0 50px;
+  margin: 0 20px;
 }
 
 nav a {
@@ -135,6 +152,60 @@ nav a {
   background: linear-gradient(90deg, var(--main-bg-color), #86b9b0);
   width: 0;
   transition: width 0.4s ease;
+}
+
+/* Volume button styling */
+.volume-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.volume-icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.volume-wrapper input[type="range"] {
+  width: 100px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  margin-left: 8px;
+}
+
+.volume-wrapper:hover input[type="range"] {
+  opacity: 1;
+}
+
+/* Timer circle styling */
+#timer-circle {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin-top: 20px;
+}
+
+#timer-display {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2em;
+  color: white;
+}
+
+.timer-controls {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.timer-controls button {
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 /* Footer styling */

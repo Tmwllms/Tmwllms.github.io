@@ -28,86 +28,132 @@ function resetHeader() {
   header.classList.remove("fullpage-header");
 }
 
+function hideAllSections() {
+  document.getElementById("home-section").style.display = "none";
+  document.getElementById("music-section").style.display = "none";
+  document.getElementById("timer-section").style.display = "none";
+}
+
 function showHome() {
   resetHeader();
   header.classList.add("fullpage-header");
-  pageContent.innerHTML = `
-    <section>
-      <h2>Welcome!</h2>
-      <p>Click "Music" to enjoy calming sounds, or "Timer" to focus your study or meditation session!</p>
-    </section>
-  `;
+  hideAllSections();
+  document.getElementById("home-section").style.display = "block";
 }
 
 function showMusic() {
   resetHeader();
-  pageContent.innerHTML = `
-  <div class="media-player">
-  <div class="image-container">
-    <img src="https://via.placeholder.com/600x300" alt="Music Cover" style="width: 100%; height: auto;">
-  </div>
-  <audio id="custom-audio-player">
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-  <div class="custom-controls">
-    <button id="play-pause-btn">
-      <img id="play-pause-img" src="https://img.icons8.com/ios-glyphs/30/play--v1.png" alt="Play Button" width="24" height="24">
-    </button>
-    <button id="loop-btn">
-      🔁
-    </button>
-    <div class="progress-bar">
-      <span id="progress-bar-fill"></span>
-    </div>
-  </div>
-</div>
-<section>
-  <h2>Additional Content</h2>
-  <p>This is where you can showcase any other relevant content.</p>
-</section>
-`;
-
+  hideAllSections();
+  document.getElementById("music-section").style.display = "block";
   reconnectAudioPlayer();
+  document
+    .getElementById("volume-control")
+    .addEventListener("input", setVolume);
 }
 
 function showTimer() {
   resetHeader();
-  pageContent.innerHTML = `
-    <section>
-      <h2>Set a Study Timer</h2>
-      <div>
-        <button onclick="startTimer(5)">5 min</button>
-        <button onclick="startTimer(10)">10 min</button>
-        <button onclick="startTimer(15)">15 min</button>
-        <button onclick="startTimer(20)">20 min</button>
-      </div>
-      <div id="timer-display" style="font-size: 2em; margin-top: 20px;">00:00</div>
-    </section>
-  `;
+  hideAllSections();
+  document.getElementById("timer-section").style.display = "flex";
+  bindTimerControls();
+  pauseBtn.addEventListener("click", () => {
+    timerPaused = !timerPaused;
+    pauseIcon.src = timerPaused
+      ? "https://img.icons8.com/ios-glyphs/30/play--v1.png"
+      : "https://img.icons8.com/ios-glyphs/30/pause--v1.png";
+  });
 }
 
 let timerInterval;
-function startTimer(minutes) {
-  clearInterval(timerInterval);
-  let seconds = minutes * 60;
+let timerAudio = new Audio("https://www.soundjay.com/button/beep-07.wav");
 
-  function updateDisplay() {
-    const min = Math.floor(seconds / 60)
-      .toString()
-      .padStart(2, "0");
-    const sec = (seconds % 60).toString().padStart(2, "0");
-    document.getElementById("timer-display").textContent = `${min}:${sec}`;
-    if (seconds > 0) {
-      seconds--;
-    } else {
+let totalTime = 0;
+let currentTime = 0;
+let timerPaused = true;
+
+function bindTimerControls() {
+  const pauseBtn = document.getElementById("pause-resume");
+  const pauseIcon = document.getElementById("pause-icon");
+
+  pauseBtn.addEventListener("click", () => {
+    timerPaused = !timerPaused;
+    pauseIcon.src = timerPaused
+      ? "https://img.icons8.com/ios-glyphs/30/play--v1.png"
+      : "https://img.icons8.com/ios-glyphs/30/pause--v1.png";
+  });
+
+  document.getElementById("timer-volume").addEventListener("input", (e) => {
+    timerAudio.volume = e.target.value;
+  });
+}
+
+function startTimer(minutes) {
+  totalTime = minutes * 60;
+  currentTime = totalTime;
+  timerPaused = true;
+  updateTimerDisplay(currentTime);
+  updateTimerCircle(currentTime);
+  startTimerCountdown(); // Ready, but paused
+}
+
+function startTimerCountdown() {
+  clearInterval(timerInterval);
+
+  timerInterval = setInterval(() => {
+    if (!timerPaused && currentTime > 0) {
+      currentTime--;
+      updateTimerDisplay(currentTime);
+      updateTimerCircle(currentTime);
+    } else if (currentTime <= 0) {
       clearInterval(timerInterval);
-      alert("Time is up!");
+      timerAudio.play(); // Play sound on complete
     }
+  }, 1000);
+}
+
+function updateTimerDisplay(seconds) {
+  const min = Math.floor(seconds / 60)
+    .toString()
+    .padStart(2, "0");
+  const sec = (seconds % 60).toString().padStart(2, "0");
+  document.getElementById("timer-display").textContent = `${min}:${sec}`;
+}
+
+function updateTimerCircle(seconds) {
+  const circle = document.getElementById("progress-ring");
+  const offset = 565.48 * (1 - seconds / totalTime);
+  circle.style.strokeDashoffset = offset;
+}
+
+function getCustomTime() {
+  const input = document.getElementById("timer-display").textContent.trim(); // Direct input from editable div
+  const regex = /^(\d{1,2}):([0-5]?\d)$/; // MM:SS format
+
+  let minutes = 0;
+  let seconds = 0;
+
+  // Check if input matches MM:SS format
+  if (regex.test(input)) {
+    const [_, mins, secs] = input.match(regex);
+    minutes = parseInt(mins, 10);
+    seconds = parseInt(secs, 10);
+  }
+  // Check if input is just minutes in MM format
+  else if (!isNaN(parseInt(input))) {
+    minutes = parseInt(input, 10);
+  } else {
+    alert("Please enter a valid time in MM:SS or MM format.");
+    return;
   }
 
-  updateDisplay();
-  timerInterval = setInterval(updateDisplay, 1000);
+  const totalSeconds = minutes * 60 + seconds;
+  totalTime = totalSeconds;
+  currentTime = totalSeconds;
+  timerPaused = true;
+
+  updateTimerDisplay(currentTime);
+  updateTimerCircle(currentTime);
+  startTimerCountdown(); // Ready, but paused
 }
 
 // Needed because after switching to "Music" we need to rebind video controls
@@ -116,6 +162,7 @@ function reconnectAudioPlayer() {
   playPauseBtn = document.querySelector("#play-pause-btn");
   playPauseImg = document.querySelector("#play-pause-img");
   progressBar = document.querySelector("#progress-bar-fill");
+  document.querySelector(".progress-bar").addEventListener("click", scrub);
   loopBtn = document.querySelector("#loop-btn");
 
   if (audio) {
@@ -127,12 +174,14 @@ function reconnectAudioPlayer() {
 }
 
 function togglePlayPause() {
-  if (audio.paused || audio.ended) {
-    audio.play();
-    playPauseImg.src = "https://img.icons8.com/ios-glyphs/30/pause--v1.png";
+  if (timerPaused && currentTime > 0) {
+    timerPaused = false;
+    startTimerCountdown(); // Start countdown from custom time input
+    playPauseImg.src = "https://img.icons8.com/ios-glyphs/30/pause--v1.png"; // Update icon
   } else {
-    audio.pause();
-    playPauseImg.src = "https://img.icons8.com/ios-glyphs/30/play--v1.png";
+    timerPaused = true;
+    clearInterval(timerInterval); // Pause countdown
+    playPauseImg.src = "https://img.icons8.com/ios-glyphs/30/play--v1.png"; // Update icon
   }
 }
 
@@ -145,3 +194,19 @@ function toggleLoop() {
   audio.loop = !audio.loop;
   loopBtn.style.backgroundColor = audio.loop ? "#4c7273" : "transparent";
 }
+
+function scrub(event) {
+  const rect = event.currentTarget.getBoundingClientRect();
+  const offsetX = event.clientX - rect.left;
+  const percent = offsetX / rect.width;
+  audio.currentTime = percent * audio.duration;
+}
+
+function setVolume(event) {
+  audio.volume = event.target.value;
+}
+
+// Ensuring that home page loads on default //
+document.addEventListener("DOMContentLoaded", () => {
+  showHome(); // Load Home on page entry
+});
