@@ -56,12 +56,64 @@ function showTimer() {
   hideAllSections();
   document.getElementById("timer-section").style.display = "flex";
   bindTimerControls();
+
+  // Helper to set caret at end of contenteditable
+  function placeCaretAtEnd(el) {
+    const range = document.createRange();
+    const sel = window.getSelection();
+    range.selectNodeContents(el);
+    range.collapse(false);
+    sel.removeAllRanges();
+    sel.addRange(range);
+  }
+
+  function enforceTimerFormat() {
+    const timerDisplay = document.getElementById("timer-display");
+    let lastValid = "00:00";
+    timerDisplay.textContent = lastValid;
+
+    // Force caret to end on click
+    timerDisplay.addEventListener("focus", () => {
+      placeCaretAtEnd(timerDisplay);
+    });
+
+    timerDisplay.addEventListener("input", (e) => {
+      // Strip all non-digits
+      let raw = timerDisplay.textContent
+        .replace(/\D/g, "")
+        .slice(0, 4)
+        .padStart(4, "0");
+
+      const minutes = raw.slice(0, 2);
+      const seconds = raw.slice(2, 4);
+
+      if (parseInt(minutes) > 99 || parseInt(seconds) > 59) {
+        timerDisplay.textContent = lastValid;
+      } else {
+        const formatted = `${minutes}:${seconds}`;
+        timerDisplay.textContent = formatted;
+        lastValid = formatted;
+        placeCaretAtEnd(timerDisplay);
+      }
+    });
+
+    // Prevent non-numeric keys
+    timerDisplay.addEventListener("keydown", (e) => {
+      const allowed = ["Backspace", "ArrowLeft", "ArrowRight", "Delete"];
+      if (!/^\d$/.test(e.key) && !allowed.includes(e.key)) {
+        e.preventDefault();
+      }
+    });
+  }
+
   pauseBtn.addEventListener("click", () => {
     timerPaused = !timerPaused;
     pauseIcon.src = timerPaused
       ? "https://img.icons8.com/ios-glyphs/30/play--v1.png"
       : "https://img.icons8.com/ios-glyphs/30/pause--v1.png";
   });
+
+  enforceTimerFormat();
 }
 
 let timerInterval;
@@ -75,12 +127,7 @@ function bindTimerControls() {
   const pauseBtn = document.getElementById("pause-resume");
   const pauseIcon = document.getElementById("pause-icon");
 
-  pauseBtn.addEventListener("click", () => {
-    timerPaused = !timerPaused;
-    pauseIcon.src = timerPaused
-      ? "https://img.icons8.com/ios-glyphs/30/play--v1.png"
-      : "https://img.icons8.com/ios-glyphs/30/pause--v1.png";
-  });
+  pauseBtn.addEventListener("click", toggleTimerPlayPause);
 
   document.getElementById("timer-volume").addEventListener("input", (e) => {
     timerAudio.volume = e.target.value;
@@ -125,37 +172,6 @@ function updateTimerCircle(seconds) {
   circle.style.strokeDashoffset = offset;
 }
 
-function getCustomTime() {
-  const input = document.getElementById("timer-display").textContent.trim(); // Direct input from editable div
-  const regex = /^(\d{1,2}):([0-5]?\d)$/; // MM:SS format
-
-  let minutes = 0;
-  let seconds = 0;
-
-  // Check if input matches MM:SS format
-  if (regex.test(input)) {
-    const [_, mins, secs] = input.match(regex);
-    minutes = parseInt(mins, 10);
-    seconds = parseInt(secs, 10);
-  }
-  // Check if input is just minutes in MM format
-  else if (!isNaN(parseInt(input))) {
-    minutes = parseInt(input, 10);
-  } else {
-    alert("Please enter a valid time in MM:SS or MM format.");
-    return;
-  }
-
-  const totalSeconds = minutes * 60 + seconds;
-  totalTime = totalSeconds;
-  currentTime = totalSeconds;
-  timerPaused = true;
-
-  updateTimerDisplay(currentTime);
-  updateTimerCircle(currentTime);
-  startTimerCountdown(); // Ready, but paused
-}
-
 // Needed because after switching to "Music" we need to rebind video controls
 function reconnectAudioPlayer() {
   audio = document.querySelector("#custom-audio-player");
@@ -173,15 +189,29 @@ function reconnectAudioPlayer() {
   }
 }
 
-function togglePlayPause() {
-  if (timerPaused && currentTime > 0) {
-    timerPaused = false;
-    startTimerCountdown(); // Start countdown from custom time input
-    playPauseImg.src = "https://img.icons8.com/ios-glyphs/30/pause--v1.png"; // Update icon
+function toggleTimerPlayPause() {
+  const input = document.getElementById("timer-display").textContent.trim();
+  const regex = /^(\d{2}):([0-5]\d)$/;
+
+  if (timerPaused) {
+    if (regex.test(input)) {
+      const [_, mins, secs] = input.match(regex);
+      totalTime = parseInt(mins, 10) * 60 + parseInt(secs, 10);
+      currentTime = totalTime;
+      timerPaused = false;
+      updateTimerDisplay(currentTime);
+      updateTimerCircle(currentTime);
+      startTimerCountdown();
+      document.getElementById("pause-icon").src =
+        "https://img.icons8.com/ios-glyphs/30/pause--v1.png";
+    } else {
+      alert("Please enter time in 00:00 format (MM:SS).");
+    }
   } else {
     timerPaused = true;
-    clearInterval(timerInterval); // Pause countdown
-    playPauseImg.src = "https://img.icons8.com/ios-glyphs/30/play--v1.png"; // Update icon
+    clearInterval(timerInterval);
+    document.getElementById("pause-icon").src =
+      "https://img.icons8.com/ios-glyphs/30/play--v1.png";
   }
 }
 

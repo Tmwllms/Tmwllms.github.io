@@ -47,12 +47,12 @@ nav {
   transition: margin 0.3s ease;
 }
 
-header.fullpage-header + nav {
-  margin-top: 0px; /* Pulls nav closer when header is tall */
+nav {
+  margin-top: 20px;
 }
 
-header:not(.fullpage-header) + nav {
-  margin-top: 5px;
+header.fullpage-header + nav {
+  margin-top: 40px; /* more breathing space when full header is active */
 }
 
 /* Create a container for the main content */
