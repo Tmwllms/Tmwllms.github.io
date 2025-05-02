@@ -1,4 +1,17 @@
+// ===============================
+// Global Variables
+// ===============================
+// These will reference key DOM elements and states for audio and UI controls.
 let audio, playPauseBtn, playPauseImg, progressBar, loopBtn;
+
+// ===============================
+// AUDIO PLAYER FUNCTIONS
+// ===============================
+
+/**
+ * Toggles audio playback between play and pause.
+ * Updates the play/pause button icon accordingly.
+ */
 
 function togglePlayPause() {
   if (audio.paused || audio.ended) {
@@ -6,10 +19,13 @@ function togglePlayPause() {
     playPauseImg.src = "assets/icons/icons8-pause-30.png";
   } else {
     audio.pause();
-    playPauseImg.src = "assets/icons/icons8-play-30.png"; // Local play icon
+    playPauseImg.src = "assets/icons/icons8-play-30.png";
   }
 }
 
+/**
+ * Updates the progress bar width based on audio's current time.
+ */
 function updateProgressBar() {
   const value = (audio.currentTime / audio.duration) * 100;
   progressBar.style.width = value + "%";
@@ -24,23 +40,38 @@ document.getElementById("homeButton").addEventListener("click", showHome);
 document.getElementById("musicButton").addEventListener("click", showMusic);
 document.getElementById("timerButton").addEventListener("click", showTimer);
 
+/**
+ * Removes the fullscreen class from the header.
+ */
 function resetHeader() {
   header.classList.remove("fullpage-header");
 }
 
+// ===============================
+// PAGE SECTION CONTROL
+// ===============================
+
+/**
+ * Hides all major page sections.
+ */
 function hideAllSections() {
   document.getElementById("home-section").style.display = "none";
   document.getElementById("music-section").style.display = "none";
   document.getElementById("timer-section").style.display = "none";
 }
 
+/**
+ * Displays the Home section and resets header layout.
+ */
 function showHome() {
   resetHeader();
   header.classList.add("fullpage-header");
   hideAllSections();
   document.getElementById("home-section").style.display = "block";
 }
-
+/**
+ * Displays the Music section and sets up the player.
+ */
 function showMusic() {
   resetHeader();
   hideAllSections();
@@ -50,22 +81,31 @@ function showMusic() {
     .getElementById("volume-control")
     .addEventListener("input", setVolume);
 }
-
+/**
+ * Displays the Timer section and binds controls.
+ */
 function showTimer() {
   resetHeader();
   hideAllSections();
   document.getElementById("timer-section").style.display = "flex";
   bindTimerControls();
 }
-
-let timerInterval;
-let timerAudio = new Audio("https://www.soundjay.com/button/beep-07.wav");
+// ===============================
+// TIMER FUNCTIONALITY
+// ===============================
+let timerInterval; // Reference to interval
+let timerAudio = new Audio(
+  "assets/audio/246390__foolboymedia__chiming-out.mp3"
+);
 
 let totalTime = 0;
 let currentTime = 0;
 let timerPaused = true;
 
 function bindTimerControls() {
+  /**
+   * Binds input, pause/resume, reset, and volume controls for timer.
+   */
   const pauseBtn = document.getElementById("pause-resume");
   const pauseIcon = document.getElementById("pause-icon");
   const input = document.getElementById("custom-time-input");
@@ -112,6 +152,10 @@ function bindTimerControls() {
     updateTimerDisplay(0);
     updateTimerCircle(0);
     pauseIcon.src = "https://img.icons8.com/ios-glyphs/30/play--v1.png";
+
+    // 🔇 Stop the timer sound effect if it's playing while stopping the need for another button
+    timerAudio.pause();
+    timerAudio.currentTime = 0;
   });
 
   document.getElementById("timer-volume").addEventListener("input", (e) => {
@@ -161,7 +205,9 @@ function updateTimerCircle(seconds) {
   circle.style.strokeDashoffset = offset;
 }
 
-// Needed because after switching to "Music" we need to rebind video controls
+// Needed because after switching to "Music" the audo player contols need to be rebinded.
+// Reconnects the audio player when switching to the Music section.
+// Rebinds event listeners and DOM references.
 function reconnectAudioPlayer() {
   audio = document.querySelector("#custom-audio-player");
   playPauseBtn = document.querySelector("#play-pause-btn");
@@ -208,19 +254,26 @@ function updateProgressBar() {
   const value = (audio.currentTime / audio.duration) * 100;
   progressBar.style.width = value + "%";
 }
-
+/**
+ * Enables or disables looping on the audio.
+ * Also updates button style to reflect loop status.
+ */
 function toggleLoop() {
   audio.loop = !audio.loop;
   loopBtn.style.backgroundColor = audio.loop ? "#4c7273" : "transparent";
 }
-
+/**
+ * Scrubs the audio to a position based on user click on progress bar.
+ */
 function scrub(event) {
   const rect = event.currentTarget.getBoundingClientRect();
   const offsetX = event.clientX - rect.left;
   const percent = offsetX / rect.width;
   audio.currentTime = percent * audio.duration;
 }
-
+/**
+ * Sets the audio volume based on the slider value.
+ */
 function setVolume(event) {
   audio.volume = event.target.value;
 }
