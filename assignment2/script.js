@@ -3,10 +3,10 @@ let audio, playPauseBtn, playPauseImg, progressBar, loopBtn;
 function togglePlayPause() {
   if (audio.paused || audio.ended) {
     audio.play();
-    playPauseImg.src = "https://img.icons8.com/ios-glyphs/30/pause--v1.png";
+    playPauseImg.src = "assets/icons/icons8-pause-30.png";
   } else {
     audio.pause();
-    playPauseImg.src = "https://img.icons8.com/ios-glyphs/30/play--v1.png";
+    playPauseImg.src = "assets/icons/icons8-play-30.png"; // Local play icon
   }
 }
 
@@ -56,64 +56,6 @@ function showTimer() {
   hideAllSections();
   document.getElementById("timer-section").style.display = "flex";
   bindTimerControls();
-
-  // Helper to set caret at end of contenteditable
-  function placeCaretAtEnd(el) {
-    const range = document.createRange();
-    const sel = window.getSelection();
-    range.selectNodeContents(el);
-    range.collapse(false);
-    sel.removeAllRanges();
-    sel.addRange(range);
-  }
-
-  function enforceTimerFormat() {
-    const timerDisplay = document.getElementById("timer-display");
-    let lastValid = "00:00";
-    timerDisplay.textContent = lastValid;
-
-    // Force caret to end on click
-    timerDisplay.addEventListener("focus", () => {
-      placeCaretAtEnd(timerDisplay);
-    });
-
-    timerDisplay.addEventListener("input", (e) => {
-      // Strip all non-digits
-      let raw = timerDisplay.textContent
-        .replace(/\D/g, "")
-        .slice(0, 4)
-        .padStart(4, "0");
-
-      const minutes = raw.slice(0, 2);
-      const seconds = raw.slice(2, 4);
-
-      if (parseInt(minutes) > 99 || parseInt(seconds) > 59) {
-        timerDisplay.textContent = lastValid;
-      } else {
-        const formatted = `${minutes}:${seconds}`;
-        timerDisplay.textContent = formatted;
-        lastValid = formatted;
-        placeCaretAtEnd(timerDisplay);
-      }
-    });
-
-    // Prevent non-numeric keys
-    timerDisplay.addEventListener("keydown", (e) => {
-      const allowed = ["Backspace", "ArrowLeft", "ArrowRight", "Delete"];
-      if (!/^\d$/.test(e.key) && !allowed.includes(e.key)) {
-        e.preventDefault();
-      }
-    });
-  }
-
-  pauseBtn.addEventListener("click", () => {
-    timerPaused = !timerPaused;
-    pauseIcon.src = timerPaused
-      ? "https://img.icons8.com/ios-glyphs/30/play--v1.png"
-      : "https://img.icons8.com/ios-glyphs/30/pause--v1.png";
-  });
-
-  enforceTimerFormat();
 }
 
 let timerInterval;
@@ -126,8 +68,51 @@ let timerPaused = true;
 function bindTimerControls() {
   const pauseBtn = document.getElementById("pause-resume");
   const pauseIcon = document.getElementById("pause-icon");
+  const input = document.getElementById("custom-time-input");
+  const resetBtn = document.getElementById("reset-btn");
+
+  input.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      const timeParts = input.value.trim().split(":");
+
+      if (
+        timeParts.length === 2 &&
+        !isNaN(timeParts[0]) &&
+        !isNaN(timeParts[1])
+      ) {
+        const minutes = parseInt(timeParts[0], 10);
+        const seconds = parseInt(timeParts[1], 10);
+
+        if (minutes >= 0 && minutes <= 1440 && seconds >= 0 && seconds < 60) {
+          const totalSeconds = minutes * 60 + seconds;
+          startTimerFromSeconds(totalSeconds);
+          input.value = "";
+        } else {
+          alert("Minutes should be 0–1440 and seconds 0–59.");
+        }
+      } else {
+        alert("Please enter time in MM:SS format.");
+      }
+    }
+  });
+
+  function startTimerFromSeconds(seconds) {
+    totalTime = seconds;
+    currentTime = totalTime;
+    timerPaused = true;
+    updateTimerDisplay(currentTime);
+    updateTimerCircle(currentTime);
+    startTimerCountdown(); // Ready but paused
+  }
 
   pauseBtn.addEventListener("click", toggleTimerPlayPause);
+  resetBtn.addEventListener("click", () => {
+    timerPaused = true;
+    clearInterval(timerInterval);
+    updateTimerDisplay(0);
+    updateTimerCircle(0);
+    pauseIcon.src = "https://img.icons8.com/ios-glyphs/30/play--v1.png";
+  });
 
   document.getElementById("timer-volume").addEventListener("input", (e) => {
     timerAudio.volume = e.target.value;
@@ -168,7 +153,11 @@ function updateTimerDisplay(seconds) {
 
 function updateTimerCircle(seconds) {
   const circle = document.getElementById("progress-ring");
-  const offset = 565.48 * (1 - seconds / totalTime);
+  const radius = circle.r.baseVal.value;
+  const circumference = 2 * Math.PI * radius;
+
+  circle.style.strokeDasharray = `${circumference} ${circumference}`;
+  const offset = circumference * (1 - seconds / totalTime);
   circle.style.strokeDashoffset = offset;
 }
 
@@ -240,3 +229,37 @@ function setVolume(event) {
 document.addEventListener("DOMContentLoaded", () => {
   showHome(); // Load Home on page entry
 });
+
+const input = document.getElementById("custom-time-input");
+const setBtn = document.getElementById("set-custom-time");
+
+setBtn.addEventListener("click", () => {
+  const timeParts = input.value.trim().split(":");
+  if (
+    timeParts.length === 2 &&
+    /^\d{1,2}$/.test(timeParts[0]) &&
+    /^\d{2}$/.test(timeParts[1])
+  ) {
+    const minutes = parseInt(timeParts[0], 10);
+    const seconds = parseInt(timeParts[1], 10);
+
+    if (minutes <= 99 && seconds < 60) {
+      const totalSeconds = minutes * 60 + seconds;
+      startTimerFromSeconds(totalSeconds);
+      input.value = "";
+    } else {
+      alert("Time must be less than or equal to 99:59.");
+    }
+  } else {
+    alert("Please enter a valid time in MM:SS format.");
+  }
+});
+
+function startTimerFromSeconds(seconds) {
+  totalTime = seconds;
+  currentTime = totalTime;
+  timerPaused = true;
+  updateTimerDisplay(currentTime);
+  updateTimerCircle(currentTime);
+  startTimerCountdown(); // just in case you use this
+}

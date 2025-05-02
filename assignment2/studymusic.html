@@ -63,16 +63,24 @@
               <button id="play-pause-btn">
                 <img
                   id="play-pause-img"
-                  src="https://img.icons8.com/ios-glyphs/30/play--v1.png"
+                  src="assets/icons/icons8-play-30.png"
                   alt="Play Button"
                   width="24"
                   height="24"
                 />
               </button>
-              <button id="loop-btn">🔁</button>
+              <button id="loop-btn">
+                <img
+                  src="assets/icons/icons8-repeat-30.png"
+                  alt="Loop"
+                  width="24"
+                  height="24"
+                />
+              </button>
+
               <div class="volume-wrapper">
                 <img
-                  src="https://img.icons8.com/ios-glyphs/30/ffffff/medium-volume.png"
+                  src="assets/icons/icons8-audio-30.png"
                   alt="Volume Icon"
                   class="volume-icon"
                 />
@@ -92,14 +100,10 @@
         <!-- Timer Section -->
         <section
           id="timer-section"
-          style="
-            display: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-          "
+          style="display: none; flex-direction: column; align-items: center"
         >
           <h2>Set a Study Timer</h2>
+
           <div>
             <button onclick="startTimer(5)">5 min</button>
             <button onclick="startTimer(10)">10 min</button>
@@ -107,43 +111,46 @@
             <button onclick="startTimer(20)">20 min</button>
           </div>
 
-          <div id="timer-circle">
-            <svg width="200" height="200">
-              <circle
-                r="90"
-                cx="100"
-                cy="100"
-                stroke="#2a3c4b"
-                stroke-width="10"
-                fill="none"
-              />
-              <circle
-                id="progress-ring"
-                r="90"
-                cx="100"
-                cy="100"
-                stroke="#a5c1ff"
-                stroke-width="10"
-                fill="none"
-                stroke-dasharray="565.48"
-                stroke-dashoffset="565.48"
-                transform="rotate(-90 100 100)"
-              />
-            </svg>
-            <div id="timer-display" contenteditable="true">00:00</div>
+          <!-- Custom time input only, no separate start button -->
+          <div id="custom-time-container">
+            <input
+              id="custom-time-input"
+              type="text"
+              placeholder="Custom time (MM:SS)"
+              maxlength="5"
+              pattern="^\d{1,2}:\d{2}$"
+            />
+            <button id="set-custom-time">Set Time</button>
           </div>
 
+          <div id="timer-circle">
+            <svg>
+              <circle
+                id="progress-ring"
+                cx="100"
+                cy="100"
+                r="90"
+                stroke="#fff"
+                stroke-width="10"
+                fill="none"
+              />
+            </svg>
+            <div id="timer-display">00:00</div>
+          </div>
+
+          <!-- Shared control buttons -->
           <div class="timer-controls">
             <button id="pause-resume">
               <img
                 id="pause-icon"
-                src="https://img.icons8.com/ios-glyphs/30/pause--v1.png"
-                alt="Pause"
+                src="icons/icons8-play-30.png"
+                alt="Play/Pause"
               />
             </button>
+            <button id="reset-btn">Reset</button>
             <div class="volume-wrapper">
               <img
-                src="https://img.icons8.com/ios-glyphs/30/ffffff/medium-volume.png"
+                src="icons/icons8-audio.gif"
                 alt="Volume Icon"
                 class="volume-icon"
               />

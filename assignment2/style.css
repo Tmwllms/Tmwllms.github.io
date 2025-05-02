@@ -183,7 +183,13 @@ nav a {
   position: relative;
   width: 200px;
   height: 200px;
-  margin-top: 20px;
+  margin: 20px auto;
+}
+
+#timer-circle svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 #timer-display {
@@ -193,6 +199,14 @@ nav a {
   transform: translate(-50%, -50%);
   font-size: 2em;
   color: white;
+  pointer-events: none;
+}
+
+#custom-time-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
 .timer-controls {
@@ -206,6 +220,22 @@ nav a {
   background: none;
   border: none;
   cursor: pointer;
+}
+
+#custom-time-input {
+  padding: 6px;
+  width: 130px;
+}
+
+#set-custom-time {
+  padding: 6px 12px;
+}
+
+#progress-ring {
+  transform: rotate(-90deg);
+  transform-origin: center;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s linear;
 }
 
 /* Footer styling */
