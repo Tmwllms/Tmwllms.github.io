@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Meta tags for character encoding and responsiveness -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Page Title -->
+    <title>Relaxation & Study Music</title>
+
+    <!-- Google Fonts: modern, readable fonts for good UX - also provides free family groups that peice together nicely.-->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500&family=Karla:wght@400;700&family=Quicksand:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Reset and main stylesheet -->
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- JS file with defer to wait for HTML load -->
+    <script src="script.js" defer></script>
+  </head>
+
+  <body>
+    <!-- =================== HEADER =================== -->
+    <header id="main-header">
+      <!-- Main title introduces website purpose -->
+      <h1>Music for Relaxation & Study</h1>
+    </header>
+
+    <!-- =================== NAVIGATION =================== -->
+    <nav>
+      <!-- Primary navigation menu for site sections -->
+      <ul>
+        <li><a href="#" id="homeButton">Home</a></li>
+        <li><a href="#" id="musicButton">Music</a></li>
+        <li><a href="#" id="timerButton">Timer</a></li>
+      </ul>
+    </nav>
+
+    <!-- =================== MAIN CONTENT =================== -->
+    <main class="container" id="main-content">
+      <div id="page-content">
+        <!-- --------- HOME SECTION --------- -->
+        <section id="home-section">
+          <h2>Welcome!</h2>
+          <p>
+            Click <strong>Music</strong> to enjoy calming sounds, or
+            <strong>Timer</strong> to focus your study or meditation session!
+          </p>
+        </section>
+
+        <!-- --------- MUSIC SECTION --------- -->
+        <section id="music-section" style="display: none">
+          <div class="media-player">
+            <!-- Album art or ambient image -->
+            <div class="image-container">
+              <img
+                src="assets/icons/DtHvUjb.gif"
+                alt="Music Cover"
+                style="width: 100%; height: auto"
+              />
+            </div>
+
+            <!-- HTML5 Audio Element -->
+            <audio id="custom-audio-player">
+              <source
+                src="assets/audio/erokia_ambient-wave-56-msfxp7-78.mp3"
+                type="audio/mpeg"
+              />
+              Your browser does not support the audio element.
+            </audio>
+
+            <!-- Interactive audio progress bar -->
+            <div class="progress-bar" onclick="scrub(event)">
+              <span id="progress-bar-fill"></span>
+            </div>
+
+            <!-- Custom audio controls -->
+            <div class="custom-controls">
+              <!-- Play/Pause toggle -->
+              <button id="play-pause-btn">
+                <img
+                  id="play-pause-img"
+                  src="assets/icons/icons8-play-30.png"
+                  alt="Play Button"
+                  width="24"
+                  height="24"
+                />
+              </button>
+
+              <!-- Loop toggle -->
+              <button id="loop-btn">
+                <img
+                  src="assets/icons/icons8-repeat-30.png"
+                  alt="Loop"
+                  width="24"
+                  height="24"
+                />
+              </button>
+
+              <!-- Volume Control -->
+              <div class="volume-wrapper">
+                <img
+                  src="assets/icons/icons8-audio-30.png"
+                  alt="Volume Icon"
+                  class="volume-icon"
+                />
+                <input
+                  type="range"
+                  id="volume-control"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  value="1"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- --------- TIMER SECTION --------- -->
+        <section
+          id="timer-section"
+          style="display: none; flex-direction: column; align-items: center"
+        >
+          <h2>Set a Study or Meditation Timer</h2>
+
+          <!-- Quick preset buttons -->
+          <div>
+            <button onclick="startTimer(5)">5 min</button>
+            <button onclick="startTimer(10)">10 min</button>
+            <button onclick="startTimer(15)">15 min</button>
+            <button onclick="startTimer(20)">20 min</button>
+          </div>
+
+          <!-- Custom time input field -->
+          <div id="custom-time-container">
+            <input
+              id="custom-time-input"
+              type="text"
+              placeholder="Custom time (MM:SS)"
+              maxlength="5"
+              pattern="^\d{1,2}:\d{2}$"
+            />
+            <button id="set-custom-time">Set Time</button>
+          </div>
+
+          <!-- Circular progress ring timer -->
+          <div id="timer-circle">
+            <svg>
+              <circle
+                id="progress-ring"
+                cx="100"
+                cy="100"
+                r="90"
+                stroke="#fff"
+                stroke-width="10"
+                fill="none"
+              />
+            </svg>
+            <div id="timer-display">00:00</div>
+          </div>
+
+          <!-- Timer control buttons (play/pause, reset) -->
+          <div class="timer-controls">
+            <button id="pause-resume">
+              <img
+                id="pause-icon"
+                src="assets/icons/icons8-play-30.png"
+                alt="Play/Pause"
+              />
+            </button>
+            <button id="reset-btn">Reset</button>
+
+            <!-- Timer volume control -->
+            <div class="volume-wrapper">
+              <img
+                src="assets/icons/icons8-audio-30.png"
+                alt="Volume Icon"
+                class="volume-icon"
+              />
+              <input
+                type="range"
+                id="timer-volume"
+                min="0"
+                max="1"
+                step="0.01"
+                value="1"
+              />
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- =================== FOOTER =================== -->
+    <footer>
+      <p>&copy; 2024 Media Player Website. All rights reserved.</p>
+      <!-- Attribution for icons used -->
+      <p>
+        <a href="https://icons8.com/icon/59862/play">Play</a> and
+        <a href="https://icons8.com/icon/61012/pause">Pause</a> icons by
+        <a href="https://icons8.com">Icons8</a>
+      </p>
+    </footer>
+  </body>
+</html>
