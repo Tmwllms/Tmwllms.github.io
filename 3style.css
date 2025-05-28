@@ -1,0 +1,161 @@
+/* OVERALL LAYOUT */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+/* # The body uses CSS Grid to create a three-row layout:
+* Header: 1 fraction unit tall
+* Main content: 4 fraction units tall (largest area)
+* Footer: 2 fraction units tall
+This proportion ensures the main content scroll area is visually dominant.
+ # */
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: sans-serif;
+  background: #333;
+  color: white;
+  display: grid;
+  grid-template-rows: 1fr 4fr 2fr; /* Header:Main:Footer ratio */
+}
+
+/* HEADER */
+header {
+  background: linear-gradient(to right, #444, #222);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+header h1 {
+  font-size: 2rem;
+}
+
+/* MAIN (Scroll Section) */
+main {
+  overflow-x: auto;
+  overflow-y: hidden;
+  position: relative;
+}
+.scroll-wrapper {
+  /* # .scroll-wrapper uses display: flex so its children (.scroll-section) line up horizontally.
+  Each .scroll-section:
+  * Has a fixed width of 100vw (full viewport width) so each “page” fills the screen horizontally.
+  * Uses flex: 0 0 auto to prevent shrinking or growing and keep exact width.
+  * Contains content centered with flexbox (justify-content and align-items).
+  Scroll snapping is optionally enabled for smooth snapping to each section on scroll.
+   # */
+  display: flex;
+  height: 100%;
+}
+.scroll-section {
+  flex: 0 0 auto;
+  width: 100vw;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #555;
+  border-right: 4px solid #222;
+  scroll-snap-align: center; /* optional for smooth snapping */
+}
+.vehicle-graphic {
+  width: 60%;
+  height: 60%;
+  background: #777;
+  border: 2px dashed #999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 10px;
+}
+.content-box {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+}
+.content-box h2 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+.content-box p {
+  color: #ccc;
+}
+
+/* FOOTER (Progress Bar/Timeline)*/
+footer {
+  background: #111;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: visible;
+  z-index: 1000;
+  padding-top: 20px;
+}
+
+.timeline-bar {
+  position: relative;
+  width: 90%;
+  height: 6px;
+  background: #444;
+  margin-bottom: 30px;
+  border-radius: 3px;
+}
+
+.timeline-progress {
+  height: 100%;
+  width: 0%;
+  background: white;
+  transition: width 0.2s ease-out;
+  border-radius: 3px;
+}
+
+.timeline-labels {
+  position: absolute;
+  top: 12px; /* below the bar */
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  font-size: 0.8rem;
+  color: #777;
+}
+
+.timeline-labels span {
+  width: 0;
+  text-align: center;
+  position: relative;
+}
+
+.timeline-indicator {
+  position: absolute;
+  top: 0;
+  height: 20px;
+  line-height: 20px;
+  font-size: 1rem;
+  color: white;
+  background: #666;
+  padding: 0 8px;
+  border-radius: 4px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  white-space: nowrap;
+  transition: left 0.2s ease;
+}

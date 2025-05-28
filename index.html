@@ -1,0 +1,144 @@
+<!-- KEY/LEGEND: (#)technical explanation/description, (@)concetpual explanation -->
+
+<!-- @ Need for Speed’s scroll function will operate as a traditional scroll section for 13 different fixed content boxes covering different vehicles and their top speeds. The time period in this scroll section will broadly cover all of the fastest vehicles across history according to technological development. The scroll section will cover the following vehicles: the Arabian horse (1000 BCE), Stephenson’s Rocket (1829), the Benz Patent-Motorwagen (1886), the Blitzen Benz (1911), the Supermarine S.6B Seaplane (1931), the Messerschmitt Me 262 (1944), the Bell X-1 (1947), the Bluebird CN7 (1964), the Lockheed SR-71 Blackbird (1966), the North American X-15 (1967), the ThrustSSC (1997), and finally the Parker Solar Probe (2018–present, ongoing mission). As user’s scroll horizontally in this section, fixed content boxes attached to their respective vehicle will reveal themselves along with information regarding its top recorded speed, type, manufacturer/designer and context. 
+
+The timeline progress bar at the bottom of the page will not require user’s to scroll, instead it will function as a sticky footer which progresses according to the vehicle scroll section. This effectively encourages passive discovery while placing a stronger focal point on the scroll section, thus pushing users to further explore and interact with the webpage. The progress bar will incorporate a minimalist design that makes it clear for users to see what time period they’re up to and a simple opacity fade at the its edges to keep the bottom of the page visually focused and not distracting. @ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Need For Speed</title>
+    <link rel="stylesheet" href="3style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Need for Speed</h1>
+    </header>
+    <!-- # The page uses a standard HTML5 structure: <header>, <main>, and <footer>.
+        The <header> holds the page title.
+        The <main> contains the horizontally scrollable timeline sections.
+        The <footer> shows the progress bar and timeline dates. # -->
+
+    <main>
+      <div class="scroll-wrapper">
+        <!-- # .scroll-wrapper is a flex container that holds all .scroll-section elements side-by-side horizontally.
+        Each .scroll-section represents a point in the timeline, with:
+        * A .vehicle-graphic placeholder.
+        * A .content-box with heading and paragraph describing that era’s vehicle (in terms of title, max-speed, designer, context).
+        Each .scroll-section uses a data-year attribute, which is also represented in the timeline footer. # -->
+        <section class="scroll-section" data-year="1790">
+          <div class="vehicle-graphic">Horse & Carriage</div>
+          <div class="content-box">
+            <h2>1790 - Arabian Horse</h2>
+            <p>Speed ~40 mph. Bred by Bedouin tribes.</p>
+          </div>
+        </section>
+        <section class="scroll-section" data-year="1829">
+          <div class="vehicle-graphic">Steam Locomotive</div>
+          <div class="content-box">
+            <h2>1829 - Rocket</h2>
+            <p>Early steam engine train, speed ~30 mph.</p>
+          </div>
+        </section>
+        <section class="scroll-section" data-year="1886">
+          <div class="vehicle-graphic">Benz Patent-Motorwagen</div>
+          <div class="content-box">
+            <h2>1886 - First Car</h2>
+            <p>The first gasoline-powered automobile.</p>
+          </div>
+        </section>
+        <section class="scroll-section" data-year="1911">
+          <div class="vehicle-graphic">Model T Ford</div>
+          <div class="content-box">
+            <h2>1911 - Model T</h2>
+            <p>Mass-produced car, affordable to the public.</p>
+          </div>
+        </section>
+        <section class="scroll-section" data-year="1931">
+          <div class="vehicle-graphic">Bugatti Royale</div>
+          <div class="content-box">
+            <h2>1931 - Bugatti Royale</h2>
+            <p>Luxury and speed combined.</p>
+          </div>
+        </section>
+        <section class="scroll-section" data-year="1944">
+          <div class="vehicle-graphic">Jeep Willys</div>
+          <div class="content-box">
+            <h2>1944 - Jeep Willys</h2>
+            <p>Military vehicle known for durability and speed.</p>
+          </div>
+        </section>
+        <section class="scroll-section" data-year="1938">
+          <div class="vehicle-graphic">Mercedes-Benz 540K</div>
+          <div class="content-box">
+            <h2>1938 - Mercedes-Benz 540K</h2>
+            <p>Elegant luxury sports car.</p>
+          </div>
+        </section>
+        <section class="scroll-section" data-year="1947">
+          <div class="vehicle-graphic">Jaguar XK120</div>
+          <div class="content-box">
+            <h2>1947 - Jaguar XK120</h2>
+            <p>World's fastest production car at the time.</p>
+          </div>
+        </section>
+        <section class="scroll-section" data-year="1964">
+          <div class="vehicle-graphic">Ford Mustang</div>
+          <div class="content-box">
+            <h2>1964 - Ford Mustang</h2>
+            <p>Iconic muscle car.</p>
+          </div>
+        </section>
+        <section class="scroll-section" data-year="1966">
+          <div class="vehicle-graphic">Shelby Cobra</div>
+          <div class="content-box">
+            <h2>1966 - Shelby Cobra</h2>
+            <p>American muscle meets British design.</p>
+          </div>
+        </section>
+        <section class="scroll-section" data-year="1967">
+          <div class="vehicle-graphic">Chevrolet Camaro</div>
+          <div class="content-box">
+            <h2>1967 - Chevrolet Camaro</h2>
+            <p>Classic muscle car era continues.</p>
+          </div>
+        </section>
+        <section class="scroll-section" data-year="1997">
+          <div class="vehicle-graphic">Toyota Supra</div>
+          <div class="content-box">
+            <h2>1997 - Toyota Supra</h2>
+            <p>Modern sports car icon.</p>
+          </div>
+        </section>
+        <section class="scroll-section" data-year="2018">
+          <div class="vehicle-graphic">Tesla Model S</div>
+          <div class="content-box">
+            <h2>2018 - Tesla Model S</h2>
+            <p>Electric speed revolution.</p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <div class="timeline-bar">
+        <!-- # * .timeline-bar is the horizontal track for the progress bar.
+        * .timeline-progress is the white bar that grows to show scroll progress (the inside filling of the progress bar as users progress).
+        * .timeline-labels contains <span> elements with each year, spaced evenly across the timeline bar (allowing users to see the extensive range of discovery available on the website).
+        * .timeline-indicator is a movable label that stays centered under the date corresponding to the current scroll position (very crucial as all information by line up accordingly with their assigned veichal).
+         # -->
+        <div class="timeline-progress"></div>
+        <div class="timeline-labels">
+          <span>1790</span><span>1829</span><span>1886</span><span>1911</span>
+          <span>1931</span><span>1944</span><span>1938</span><span>1947</span>
+          <span>1964</span><span>1966</span><span>1967</span><span>1997</span>
+          <span>2018</span>
+        </div>
+      </div>
+      <div class="timeline-indicator">1790</div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
