@@ -5,67 +5,88 @@
   box-sizing: border-box;
 }
 html,
-/* # The body uses CSS Grid to create a three-row layout:
-* Header: 1 fraction unit tall
-* Main content: 4 fraction units tall (largest area)
-* Footer: 2 fraction units tall
-This proportion ensures the main content scroll area is visually dominant.
- # */
+header,
+footer {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  z-index: 1000;
+}
+
 body {
   height: 100%;
   width: 100%;
   overflow: hidden;
-}
-
-body {
+  height: 100vh;
   font-family: sans-serif;
   background: #333;
   color: white;
-  display: grid;
-  grid-template-rows: 1fr 4fr 2fr; /* Header:Main:Footer ratio */
 }
 
 /* HEADER */
 header {
-  background: linear-gradient(to right, #444, #222);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-header h1 {
-  font-size: 2rem;
+  top: 0;
+  height: 80px; /* or whatever you need */
 }
 
 /* MAIN (Scroll Section) */
 main {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
   overflow-x: auto;
   overflow-y: hidden;
-  position: relative;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  z-index: 1;
 }
-.scroll-wrapper {
-  /* # .scroll-wrapper uses display: flex so its children (.scroll-section) line up horizontally.
+
+/* # .scroll-wrapper uses display: flex so its children (.scroll-section) line up horizontally.
   Each .scroll-section:
   * Has a fixed width of 100vw (full viewport width) so each “page” fills the screen horizontally.
   * Uses flex: 0 0 auto to prevent shrinking or growing and keep exact width.
   * Contains content centered with flexbox (justify-content and align-items).
   Scroll snapping is optionally enabled for smooth snapping to each section on scroll.
    # */
-  display: flex;
-  height: 100%;
-}
-.scroll-section {
-  flex: 0 0 auto;
-  width: 100vw;
+.scroll-wrapper {
   position: relative;
+  display: flex;
+  width: calc(1920px * 12); /* 12 sections */
+  height: 100vh;
+  scroll-snap-type: x mandatory;
+  overflow: visible;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  background-color: #000; /* fallback color */
+}
+
+.scroll-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(1920px * 12); /* match width of scroll-wrapper */
+  height: 100%;
+  background: url("Assets/Images/Needforspeedscroll.png") no-repeat;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: top left;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.scroll-section {
+  flex: 0 0 1920px;
+  width: 1920px;
+  position: absolute;
+  z-index: 10;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #555;
-  border-right: 4px solid #222;
-  scroll-snap-align: center; /* optional for smooth snapping */
+  scroll-snap-align: center;
 }
 .vehicle-graphic {
+  display: none;
   width: 60%;
   height: 60%;
   background: #777;
@@ -87,6 +108,8 @@ main {
   padding: 1.5rem;
   border-radius: 8px;
   text-align: center;
+
+  border: 2px solid red;
 }
 .content-box h2 {
   margin-bottom: 1rem;
@@ -96,17 +119,63 @@ main {
   color: #ccc;
 }
 
+.scroll-section:nth-child(1) .content-box {
+  top: 15%;
+  left: 10%;
+}
+.scroll-section:nth-child(2) .content-box {
+  top: 20%;
+  left: 20%;
+}
+.scroll-section:nth-child(3) .content-box {
+  top: 25%;
+  left: 30%;
+}
+.scroll-section:nth-child(4) .content-box {
+  top: 30%;
+  left: 40%;
+}
+.scroll-section:nth-child(5) .content-box {
+  top: 35%;
+  left: 50%;
+}
+.scroll-section:nth-child(6) .content-box {
+  top: 40%;
+  left: 60%;
+}
+.scroll-section:nth-child(7) .content-box {
+  top: 45%;
+  left: 70%;
+}
+.scroll-section:nth-child(8) .content-box {
+  top: 50%;
+  left: 80%;
+}
+.scroll-section:nth-child(9) .content-box {
+  top: 55%;
+  left: 20%;
+}
+.scroll-section:nth-child(10) .content-box {
+  top: 60%;
+  left: 30%;
+}
+.scroll-section:nth-child(11) .content-box {
+  top: 65%;
+  left: 40%;
+}
+.scroll-section:nth-child(12) .content-box {
+  top: 70%;
+  left: 50%;
+}
+
 /* FOOTER (Progress Bar/Timeline)*/
 footer {
   background: #111;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  position: relative;
-  overflow: visible;
-  z-index: 1000;
-  padding-top: 20px;
+  bottom: 0;
+  height: 100px; /* adjust as needed */
 }
 
 .timeline-bar {
@@ -139,9 +208,10 @@ footer {
 }
 
 .timeline-labels span {
-  width: 0;
+  width: 1920px; /* ✅ match section width */
   text-align: center;
   position: relative;
+  flex: none; /* ✅ prevent it from auto-stretching */
 }
 
 .timeline-indicator {
