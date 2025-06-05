@@ -26,9 +26,21 @@ body {
 /* HEADER */
 header {
   top: 0;
-  height: 80px; /* or whatever you need */
+  height: 100px;
+  background-color: #111; /* match footer for consistency */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
 
+header h1 {
+  font-size: 2rem;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 2px;
+}
 /* MAIN (Scroll Section) */
 main {
   position: relative;
@@ -51,13 +63,14 @@ main {
 .scroll-wrapper {
   position: relative;
   display: flex;
-  width: calc(1920px * 12); /* 12 sections */
+  width: 23040px; /* 12 sections * 1920px */
   height: 100vh;
   scroll-snap-type: x mandatory;
   overflow: visible;
   overflow-y: hidden;
   scroll-behavior: smooth;
-  background-color: #000; /* fallback color */
+  background-color: #000;
+  z-index: 1; /* ✅ Ensure it's set properly */
 }
 
 .scroll-wrapper::before {
@@ -65,20 +78,27 @@ main {
   position: absolute;
   top: 0;
   left: 0;
-  width: calc(1920px * 12); /* match width of scroll-wrapper */
+  width: 23040px;
   height: 100%;
-  background: url("Assets/Images/Needforspeedscroll.png") no-repeat;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: top left;
-  z-index: 0;
+  z-index: 1;
   pointer-events: none;
+
+  background-image: linear-gradient(
+      to bottom,
+      rgba(17, 17, 17, 0.7),
+      rgba(34, 34, 34, 0.7)
+    ),
+    url("Assets/Images/Needforspeedscroll.png");
+
+  background-repeat: no-repeat, no-repeat;
+  background-size: 23040px 100%, 23040px 100%;
+  background-position: top left, top left;
 }
 
 .scroll-section {
   flex: 0 0 1920px;
   width: 1920px;
-  position: absolute;
+  position: relative; /* ✅ Not absolute */
   z-index: 10;
   display: flex;
   justify-content: center;
@@ -86,17 +106,12 @@ main {
   scroll-snap-align: center;
 }
 .vehicle-graphic {
-  display: none;
-  width: 60%;
-  height: 60%;
-  background: #777;
-  border: 2px dashed #999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.2rem;
-  text-align: center;
-  padding: 10px;
+  display: none; /* this is fine */
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
 }
 .content-box {
   position: absolute;
@@ -178,9 +193,32 @@ footer {
   height: 100px; /* adjust as needed */
 }
 
+.timeline-track {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  height: 20px;
+  margin-bottom: 10px;
+}
+
+.timeline-labels {
+  display: flex;
+  width: 23040px; /* match scroll-wrapper width */
+  position: relative;
+  left: 0;
+}
+
+.timeline-labels span {
+  width: 1920px;
+  text-align: center;
+  color: #aaa;
+  font-size: 0.75rem;
+}
+
 .timeline-bar {
   position: relative;
   width: 90%;
+  margin: 0 auto; /* ✅ center it */
   height: 6px;
   background: #444;
   margin-bottom: 30px;

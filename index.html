@@ -113,15 +113,13 @@ The timeline progress bar at the bottom of the page will not require user’s to
         </section>
       </div>
     </main>
-
-    <footer>
-      <div class="timeline-bar">
-        <!-- # * .timeline-bar is the horizontal track for the progress bar.
+    <!-- # * .timeline-bar is the horizontal track for the progress bar.
         * .timeline-progress is the white bar that grows to show scroll progress (the inside filling of the progress bar as users progress).
         * .timeline-labels contains <span> elements with each year, spaced evenly across the timeline bar (allowing users to see the extensive range of discovery available on the website).
         * .timeline-indicator is a movable label that stays centered under the date corresponding to the current scroll position (very crucial as all information by line up accordingly with their assigned veichal).
          # -->
-        <div class="timeline-progress"></div>
+    <footer>
+      <div class="timeline-track">
         <div class="timeline-labels">
           <span>1790</span><span>1829</span><span>1886</span><span>1911</span>
           <span>1931</span><span>1944</span><span>1938</span><span>1947</span>
@@ -129,6 +127,11 @@ The timeline progress bar at the bottom of the page will not require user’s to
           <span>2018</span>
         </div>
       </div>
+
+      <div class="timeline-bar">
+        <div class="timeline-progress"></div>
+      </div>
+
       <div class="timeline-indicator">1790</div>
     </footer>
 
