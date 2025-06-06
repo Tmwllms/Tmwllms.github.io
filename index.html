@@ -1,6 +1,6 @@
 <!-- KEY/LEGEND: (#)technical explanation/description, (@)concetpual explanation -->
 
-<!-- @ Need for Speed’s scroll function will operate as a traditional scroll section for 13 different fixed content boxes covering different vehicles and their top speeds. The time period in this scroll section will broadly cover all of the fastest vehicles across history according to technological development. The scroll section will cover the following vehicles: the Arabian horse (1000 BCE), Stephenson’s Rocket (1829), the Benz Patent-Motorwagen (1886), the Blitzen Benz (1911), the Supermarine S.6B Seaplane (1931), the Messerschmitt Me 262 (1944), the Bell X-1 (1947), the Bluebird CN7 (1964), the Lockheed SR-71 Blackbird (1966), the North American X-15 (1967), the ThrustSSC (1997), and finally the Parker Solar Probe (2018–present, ongoing mission). As user’s scroll horizontally in this section, fixed content boxes attached to their respective vehicle will reveal themselves along with information regarding its top recorded speed, type, manufacturer/designer and context. 
+<!-- @ ‘Need for Speed’s scroll function will operate as a traditional scroll section for 12 different fixed content boxes covering different vehicles and their top speeds. The time period in this scroll section will broadly cover all of the fastest vehicles across history according to technological development. The scroll section will cover the following vehicles: the Arabian horse (1000 BCE), Stephenson’s Rocket (1829), the Benz Patent-Motorwagen (1886), the Blitzen Benz (1911), the Supermarine S.6B Seaplane (1931), the Messerschmitt Me 262 (1944), the Bell X-1 (1947), the Bluebird CN7 (1964), the Lockheed SR-71 Blackbird (1966), the North American X-15 (1967), the ThrustSSC (1997), and finally the Parker Solar Probe (2018–present, ongoing mission). As user’s scroll horizontally in this section, fixed content boxes attached to their respective vehicle will reveal themselves along with information regarding its top recorded speed, type, manufacturer/designer and context. 
 
 The timeline progress bar at the bottom of the page will not require user’s to scroll, instead it will function as a sticky footer which progresses according to the vehicle scroll section. This effectively encourages passive discovery while placing a stronger focal point on the scroll section, thus pushing users to further explore and interact with the webpage. The progress bar will incorporate a minimalist design that makes it clear for users to see what time period they’re up to and a simple opacity fade at the its edges to keep the bottom of the page visually focused and not distracting. @ -->
 <!DOCTYPE html>
@@ -10,6 +10,14 @@ The timeline progress bar at the bottom of the page will not require user’s to
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Need For Speed</title>
     <link rel="stylesheet" href="3style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <header>
@@ -18,7 +26,7 @@ The timeline progress bar at the bottom of the page will not require user’s to
     <!-- # The page uses a standard HTML5 structure: <header>, <main>, and <footer>.
         The <header> holds the page title.
         The <main> contains the horizontally scrollable timeline sections.
-        The <footer> shows the progress bar and timeline dates. # -->
+        The <footer> shows the progress bar # -->
 
     <main>
       <div class="scroll-wrapper">
@@ -27,114 +35,176 @@ The timeline progress bar at the bottom of the page will not require user’s to
         * A .vehicle-graphic placeholder.
         * A .content-box with heading and paragraph describing that era’s vehicle (in terms of title, max-speed, designer, context).
         Each .scroll-section uses a data-year attribute, which is also represented in the timeline footer. # -->
-        <section class="scroll-section" data-year="1790">
-          <div class="vehicle-graphic">Horse & Carriage</div>
+        <section class="scroll-section" data-year="1000 BCE">
+          <div class="vehicle-graphic">Arabian Horse</div>
           <div class="content-box">
-            <h2>1790 - Arabian Horse</h2>
-            <p>Speed ~40 mph. Bred by Bedouin tribes.</p>
+            <h2>1000 BCE - Arabian Horse</h2>
+            <p>Top Speed: 64 km/h</p>
+            <p>Type: Horse</p>
+            <p>Creator: Bred by Bedouin tribes of the Arabian Peninsula</p>
+            <p>
+              Context: Known for speed and endurance. Set the standard for
+              centuries.
+            </p>
           </div>
         </section>
         <section class="scroll-section" data-year="1829">
-          <div class="vehicle-graphic">Steam Locomotive</div>
+          <div class="vehicle-graphic">Stephenson’s Rocket</div>
           <div class="content-box">
-            <h2>1829 - Rocket</h2>
-            <p>Early steam engine train, speed ~30 mph.</p>
+            <h2>1829 - Stephenson’s Rocket</h2>
+            <p>Top Speed: 48 km/h</p>
+            <p>Type: Steam Locomotive</p>
+            <p>Designer: George and Robert Stephenson</p>
+            <p>Manufacturer: Robert Stephenson and Company</p>
+            <p>
+              Context: Revolutionized railway transport. Won the Rainhill
+              Trials.
+            </p>
           </div>
         </section>
         <section class="scroll-section" data-year="1886">
           <div class="vehicle-graphic">Benz Patent-Motorwagen</div>
           <div class="content-box">
-            <h2>1886 - First Car</h2>
-            <p>The first gasoline-powered automobile.</p>
+            <h2>1886 – Benz Patent-Motorwagen</h2>
+            <p>Top Speed: 16 km/h</p>
+            <p>Type: Car</p>
+            <p>Designer/Inventor: Karl Benz</p>
+            <p>Manufacturer: Benz & Cie.</p>
+            <p>
+              Context: First gasoline-powered car, initiating modern automotive
+              history.
+            </p>
           </div>
         </section>
         <section class="scroll-section" data-year="1911">
-          <div class="vehicle-graphic">Model T Ford</div>
+          <div class="vehicle-graphic">Blitzen Benz</div>
           <div class="content-box">
-            <h2>1911 - Model T</h2>
-            <p>Mass-produced car, affordable to the public.</p>
+            <h2>1911 – Blitzen Benz</h2>
+            <p>Top Speed: 228 km/h</p>
+            <p>Type: Land speed record car</p>
+            <p>Manufacturer: Benz & Cie.</p>
+            <p>
+              Driver: Bob Burman Context: First car to surpass 200 km/h; fastest
+              vehicle of its era.
+            </p>
           </div>
         </section>
         <section class="scroll-section" data-year="1931">
-          <div class="vehicle-graphic">Bugatti Royale</div>
+          <div class="vehicle-graphic">Supermarine S.6B</div>
           <div class="content-box">
-            <h2>1931 - Bugatti Royale</h2>
-            <p>Luxury and speed combined.</p>
+            <h2>1931 – Supermarine S.6B</h2>
+            <p>Top Speed: 655.67 km/h</p>
+            <p>Type: Seaplane (Racing Aircraft)</p>
+            <p>Designer: Reginald Mitchell</p>
+            <p>Manufacturer: Supermarine Aviation Works</p>
+            <p>Context: Won the Schneider</p>
+            <p>Trophy; direct predecessor to the Spitfire.</p>
           </div>
         </section>
         <section class="scroll-section" data-year="1944">
-          <div class="vehicle-graphic">Jeep Willys</div>
+          <div class="vehicle-graphic">Messerschmitt Me 262</div>
           <div class="content-box">
-            <h2>1944 - Jeep Willys</h2>
-            <p>Military vehicle known for durability and speed.</p>
-          </div>
-        </section>
-        <section class="scroll-section" data-year="1938">
-          <div class="vehicle-graphic">Mercedes-Benz 540K</div>
-          <div class="content-box">
-            <h2>1938 - Mercedes-Benz 540K</h2>
-            <p>Elegant luxury sports car.</p>
+            <h2>1944 – Messerschmitt Me 262</h2>
+            <p>Top Speed: 900 km/h</p>
+            <p>Type: Jet Fighter</p>
+            <p>Designer: Willy Messerschmitt</p>
+            <p>Manufacturer: Messerschmitt AG</p>
+            <p>
+              Context: First operational jet-powered combat aircraft. Changed
+              aerial combat.
+            </p>
           </div>
         </section>
         <section class="scroll-section" data-year="1947">
-          <div class="vehicle-graphic">Jaguar XK120</div>
+          <div class="vehicle-graphic">Bell X-1</div>
           <div class="content-box">
-            <h2>1947 - Jaguar XK120</h2>
-            <p>World's fastest production car at the time.</p>
+            <h2>1947 – Bell X-1</h2>
+            <p>Top Speed: Mach 1.06 (1,300 km/h)</p>
+            <p>Type: Rocket Plane</p>
+            <p>Manufacturer: Bell Aircraft Corporation</p>
+            <p>Pilot: Chuck Yeager</p>
+            <p>Context: First manned aircraft to break the sound barrier.</p>
           </div>
         </section>
         <section class="scroll-section" data-year="1964">
-          <div class="vehicle-graphic">Ford Mustang</div>
+          <div class="vehicle-graphic">Bluebird CN7</div>
           <div class="content-box">
-            <h2>1964 - Ford Mustang</h2>
-            <p>Iconic muscle car.</p>
+            <h2>1964 – Bluebird CN7</h2>
+            <p>Top Speed: 648 km/h</p>
+            <p>Type: Land Speed Record Car</p>
+            <p>Designer: Ken Norris & Lewis C. Norris</p>
+            <p>Manufacturer: Norris Brothers / Dunlop / Rootes Group</p>
+            <p>Driver: Donald Campbell</p>
+            <p>Context: Wheel-driven land speed record holder at the time.</p>
           </div>
         </section>
         <section class="scroll-section" data-year="1966">
-          <div class="vehicle-graphic">Shelby Cobra</div>
+          <div class="vehicle-graphic">Lockheed SR-71</div>
           <div class="content-box">
-            <h2>1966 - Shelby Cobra</h2>
-            <p>American muscle meets British design.</p>
+            <h2>1966 – Lockheed SR-71</h2>
+            <p>Top Speed: Mach 3.3 3,530 km/h</p>
+            <p>Type: Strategic Reconnaissance Aircraft</p>
+            <p>Designer: Clarence "Kelly" Johnson</p>
+            <p>Manufacturer: Lockheed Skunk Works</p>
+            <p>
+              Context: Still the fastest air-breathing manned aircraft ever.
+            </p>
           </div>
         </section>
         <section class="scroll-section" data-year="1967">
-          <div class="vehicle-graphic">Chevrolet Camaro</div>
+          <div class="vehicle-graphic">North American X-15</div>
           <div class="content-box">
-            <h2>1967 - Chevrolet Camaro</h2>
-            <p>Classic muscle car era continues.</p>
+            <h2>1967 – North American X-15</h2>
+            <p>Top Speed: Mach 6.7 (7,274 km/h)</p>
+            <p>Type: Experimental Rocket Plane</p>
+            <p>Manufacturer: North American Aviation</p>
+            <p>Pilot: William J. "Pete" Knight</p>
+            <p>
+              Context: Fastest manned aircraft; paved the way for space
+              missions.
+            </p>
           </div>
         </section>
         <section class="scroll-section" data-year="1997">
-          <div class="vehicle-graphic">Toyota Supra</div>
+          <div class="vehicle-graphic">ThrustSSC</div>
           <div class="content-box">
-            <h2>1997 - Toyota Supra</h2>
-            <p>Modern sports car icon.</p>
+            <h2>1997 – ThrustSSC</h2>
+            <p>Top Speed: 1,228 km/h</p>
+            <p>Type: Jet-Powered Car</p>
+            <p>Designer: Ron Ayers</p>
+            <p>Project Leader: Richard Noble</p>
+            <p>Driver: Andy Green</p>
+            <p>
+              Context: First land vehicle to officially break the sound barrier.
+            </p>
+          </div>
+        </section>
+        <section class="scroll-section" data-year="2018 & Ongoing">
+          <div class="vehicle-graphic">Parker Solar Probe</div>
+          <div class="content-box">
+            <h2>2018 & Ongoing – Parker Solar Probe</h2>
+            <p>Top Speed: Projected 700,000 km/h by 2025</p>
+            <p>Type: Spacecraft</p>
+            <p>Designer/Agency: NASA</p>
+            <p>
+              Built By: Johns Hopkins University Applied Physics Laboratory
+              (APL)
+            </p>
+            <p>
+              Context: Fastest human-made object. Slingshots around the Sun to
+              study solar wind.
+            </p>
           </div>
         </section>
       </div>
     </main>
-    <!-- # * .timeline-bar is the horizontal track for the progress bar.
-        * .timeline-progress is the white bar that grows to show scroll progress (the inside filling of the progress bar as users progress).
-        * .timeline-labels contains <span> elements with each year, spaced evenly across the timeline bar (allowing users to see the extensive range of discovery available on the website).
-        * .timeline-indicator is a movable label that stays centered under the date corresponding to the current scroll position (very crucial as all information by line up accordingly with their assigned veichal).
-         # -->
+    <!-- # * .progress-bar is the horizontal track for the scroll progress.
+        * .timeline-progress is the white bar that grows to show scroll progress (the inside filling of the progress bar as users progress). # -->
     <footer>
-      <div class="timeline-track">
-        <div class="timeline-labels">
-          <span>1790</span><span>1829</span><span>1886</span><span>1911</span>
-          <span>1931</span><span>1944</span><span>1938</span><span>1947</span>
-          <span>1964</span><span>1966</span><span>1967</span><span>1997</span>
-          <span>2018</span>
-        </div>
-      </div>
-
-      <div class="timeline-bar">
-        <div class="timeline-progress"></div>
-      </div>
-
-      <div class="timeline-indicator">1790</div>
+      <div class="progress-bar" id="progress-bar"></div>
     </footer>
 
     <script src="script.js"></script>
   </body>
 </html>
+<!-- @ Although I struglled quite a bit with this course, I found it extremley helpfull and interesting. I would of liked to have had a timeline bar above the progress bar within the footer. However, technical failures and multiple assignments prevailed. Adding sounds for each of the vehicles also could have served to significantly enhance the viewing experience for the audience.@ -->

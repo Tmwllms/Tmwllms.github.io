@@ -27,19 +27,32 @@ body {
 header {
   top: 0;
   height: 100px;
-  background-color: #111; /* match footer for consistency */
+  background: linear-gradient(to right, #0f0f0f, #1a1a1a);
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
+  border-bottom: 2px solid red;
   z-index: 1000;
 }
-
+/* @ I chose red as the main stylization colour as it best reperesents speed. e.g. the brake lights of cars speeding past */
 header h1 {
-  font-size: 2rem;
-  color: white;
-  font-weight: bold;
-  text-align: center;
-  letter-spacing: 2px;
+  font-size: 2.5rem;
+  color: #ff3333;
+  font-family: "Orbitron", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-shadow: 0 0 10px rgba(255, 50, 50, 0.6);
+  animation: pulseSpeed 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulseSpeed {
+  from {
+    text-shadow: 0 0 5px red;
+  }
+  to {
+    text-shadow: 0 0 20px #ff4444;
+  }
 }
 /* MAIN (Scroll Section) */
 main {
@@ -69,8 +82,8 @@ main {
   overflow: visible;
   overflow-y: hidden;
   scroll-behavior: smooth;
-  background-color: #000;
-  z-index: 1; /* ✅ Ensure it's set properly */
+  background: linear-gradient(to right, #caedee 0%, #415e61 50%, #000 100%);
+  z-index: 1;
 }
 
 .scroll-wrapper::before {
@@ -83,12 +96,7 @@ main {
   z-index: 1;
   pointer-events: none;
 
-  background-image: linear-gradient(
-      to bottom,
-      rgba(17, 17, 17, 0.7),
-      rgba(34, 34, 34, 0.7)
-    ),
-    url("Assets/Images/Needforspeedscroll.png");
+  background-image: url("Assets/Images/Needforspeedscroll.png");
 
   background-repeat: no-repeat, no-repeat;
   background-size: 23040px 100%, 23040px 100%;
@@ -98,7 +106,7 @@ main {
 .scroll-section {
   flex: 0 0 1920px;
   width: 1920px;
-  position: relative; /* ✅ Not absolute */
+  position: relative;
   z-index: 10;
   display: flex;
   justify-content: center;
@@ -106,7 +114,7 @@ main {
   scroll-snap-align: center;
 }
 .vehicle-graphic {
-  display: none; /* this is fine */
+  display: none; /* previous placeholder for where images would go */
   width: 0;
   height: 0;
   padding: 0;
@@ -119,19 +127,40 @@ main {
   left: 50%;
   transform: translateX(-50%);
   width: 400px;
-  background: rgba(0, 0, 0, 0.6);
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.85),
+    rgba(50, 0, 0, 0.85)
+  );
   padding: 1.5rem;
-  border-radius: 8px;
+  border-radius: 10px;
   text-align: center;
-
-  border: 2px solid red;
+  border: 2px solid #ff0000;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+/* @ The content boxes also embody the red, neon theme of speed @ */
+.content-box:hover {
+  transform: translateX(-50%) scale(1.03);
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+}
+
 .content-box h2 {
   margin-bottom: 1rem;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
+  font-family: "Orbitron", sans-serif;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #ff3333;
+  padding-bottom: 0.5rem;
 }
+
 .content-box p {
   color: #ccc;
+  font-family: "Roboto", sans-serif;
+  line-height: 1.4;
+  font-size: 0.95rem;
 }
 
 .scroll-section:nth-child(1) .content-box {
@@ -151,36 +180,36 @@ main {
   left: 40%;
 }
 .scroll-section:nth-child(5) .content-box {
-  top: 35%;
-  left: 50%;
+  top: 15%;
+  left: 78%;
 }
 .scroll-section:nth-child(6) .content-box {
-  top: 40%;
+  top: 15%;
   left: 60%;
 }
 .scroll-section:nth-child(7) .content-box {
   top: 45%;
-  left: 70%;
+  left: 85%;
 }
 .scroll-section:nth-child(8) .content-box {
-  top: 50%;
-  left: 80%;
+  top: 20%;
+  left: 50%;
 }
 .scroll-section:nth-child(9) .content-box {
   top: 55%;
   left: 20%;
 }
 .scroll-section:nth-child(10) .content-box {
-  top: 60%;
+  top: 20%;
   left: 30%;
 }
 .scroll-section:nth-child(11) .content-box {
-  top: 65%;
-  left: 40%;
+  top: 20%;
+  left: 50%;
 }
 .scroll-section:nth-child(12) .content-box {
-  top: 70%;
-  left: 50%;
+  top: 30%;
+  left: 80%;
 }
 
 /* FOOTER (Progress Bar/Timeline)*/
@@ -190,80 +219,12 @@ footer {
   flex-direction: column;
   justify-content: center;
   bottom: 0;
-  height: 100px; /* adjust as needed */
+  height: 100px;
 }
 
-.timeline-track {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  height: 20px;
-  margin-bottom: 10px;
-}
-
-.timeline-labels {
-  display: flex;
-  width: 23040px; /* match scroll-wrapper width */
-  position: relative;
-  left: 0;
-}
-
-.timeline-labels span {
-  width: 1920px;
-  text-align: center;
-  color: #aaa;
-  font-size: 0.75rem;
-}
-
-.timeline-bar {
-  position: relative;
-  width: 90%;
-  margin: 0 auto; /* ✅ center it */
-  height: 6px;
-  background: #444;
-  margin-bottom: 30px;
-  border-radius: 3px;
-}
-
-.timeline-progress {
+#progress-bar {
   height: 100%;
   width: 0%;
-  background: white;
+  background: linear-gradient(to right, #ff1a1a, #ff3333, #ff6666);
   transition: width 0.2s ease-out;
-  border-radius: 3px;
-}
-
-.timeline-labels {
-  position: absolute;
-  top: 12px; /* below the bar */
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  pointer-events: none;
-  font-size: 0.8rem;
-  color: #777;
-}
-
-.timeline-labels span {
-  width: 1920px; /* ✅ match section width */
-  text-align: center;
-  position: relative;
-  flex: none; /* ✅ prevent it from auto-stretching */
-}
-
-.timeline-indicator {
-  position: absolute;
-  top: 0;
-  height: 20px;
-  line-height: 20px;
-  font-size: 1rem;
-  color: white;
-  background: #666;
-  padding: 0 8px;
-  border-radius: 4px;
-  transform: translateX(-50%);
-  pointer-events: none;
-  white-space: nowrap;
-  transition: left 0.2s ease;
 }
